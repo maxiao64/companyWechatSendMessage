@@ -8,6 +8,10 @@ import _thread
 from pynput.keyboard import Controller, Key, Listener
 
 in_process = 1
+command = 'command'
+if platform.system().lower() == 'windows':
+    command = 'ctrl'
+    
 # 监听按压
 def on_press(key):
     print("已经按下:", format(key))
@@ -34,13 +38,13 @@ def get_import_data():
     
 def send_message(user,msg):
     pyperclip.copy(user)
-    hot_key('command','f')
-    hot_key('command','v')
+    hot_key(command,'f')
+    hot_key(command,'v')
     time.sleep(1)
     pyautogui.press('enter')
     time.sleep(0.5)
     pyperclip.copy(msg)
-    hot_key('command','v')
+    hot_key(command,'v')
     pyautogui.press('enter')
     
 def hot_key(key1,key2):
@@ -71,7 +75,7 @@ def main():
     for n in range(1,nrows):
         print(in_process)
         if(in_process == 0):
-            exit()
+            sys.exit()
         row_data = table.row_values(n, start_colx=0, end_colx=None)
         send_message(row_data[0], row_data[1])
 if __name__ == '__main__':
