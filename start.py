@@ -20,7 +20,7 @@ def on_press(key):
 # 监听释放
 def on_release(key):
     print("已经释放:", format(key))
-    if key == Key.esc:
+    if key == Key.shift_l:
         print('stop')
         global in_process
         in_process = 0
